@@ -13,7 +13,7 @@ def __str__(self):
     return self.nickname
 
 
-class Admin:
+class Meta:
     db_table = 'my_user'
     verbose_name = '고객'
     verbose_name_plural = '고객'

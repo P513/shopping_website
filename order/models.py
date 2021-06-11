@@ -15,7 +15,7 @@ def __str__(self):
     return self.name
 
 
-class Admin:
+class Meta:
     db_table = 'my_order'
     verbose_name = '주문'
     verbose_name_plural = '주문'
