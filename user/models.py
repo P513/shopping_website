@@ -2,7 +2,7 @@ from django.db import models
 
 
 class User(models.Model):
-    id = models.CharField(max_length=64, verbose_name='아이디')
+    _id = models.CharField(max_length=64, verbose_name='아이디')
     nickname = models.CharField(max_length=64, verbose_name='닉네임')
     email = models.EmailField(verbose_name='이메일')
     password = models.CharField(max_length=64, verbose_name='비밀번호')
