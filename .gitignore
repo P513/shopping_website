@@ -1,0 +1,4 @@
+*.cmd
+venvs
+__pycache__/
+config/settings.py
