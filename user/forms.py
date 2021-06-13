@@ -16,9 +16,22 @@ class SignUpForm(forms.Form):
 
     def clean(self):
         cleaned_data = super().clean()
+        check = 1
         _id = cleaned_data.get('_id')
+        if _id:
+            if User.objects.filter(_id=_id).exists():
+                self.add_error('_id', '존재하는 아이디입니다.')
+                check = 0
         nickname = cleaned_data.get('nickname')
+        if nickname:
+            if User.objects.filter(nickname=nickname).exists():
+                self.add_error('nickname', '존재하는 닉네임입니다.')
+                check = 0
         email = cleaned_data.get('email')
+        if email:
+            if User.objects.filter(email=email).exists():
+                self.add_error('email', '이미 가입된 이메일입니다.')
+                check = 0
         password = cleaned_data.get('password')
         confirm_password = cleaned_data.get('confirm_password')
 
@@ -27,13 +40,14 @@ class SignUpForm(forms.Form):
                 self.add_error('password', '비밀번호가 서로 다릅니다.')
                 self.add_error('confirm_password', '비밀번호가 서로 다릅니다.')
             else:
-                user = User(
-                    _id=id,
-                    nickname=nickname,
-                    email=email,
-                    password=password,
-                )
-                user.save()
+                if check == 1:
+                    user = User(
+                        _id=_id,
+                        nickname=nickname,
+                        email=email,
+                        password=password,
+                    )
+                    user.save()
 
 
 class LoginForm(forms.Form):

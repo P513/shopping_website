@@ -2,9 +2,9 @@ from django.db import models
 
 
 class User(models.Model):
-    _id = models.CharField(max_length=64, verbose_name='아이디')
-    nickname = models.CharField(max_length=64, verbose_name='닉네임')
-    email = models.EmailField(verbose_name='이메일')
+    _id = models.CharField(max_length=64, verbose_name='아이디', unique=True)
+    nickname = models.CharField(max_length=64, verbose_name='닉네임', unique=True)
+    email = models.EmailField(verbose_name='이메일', unique=True)
     password = models.CharField(max_length=64, verbose_name='비밀번호')
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
 

@@ -18,6 +18,18 @@
             {% for field in form %}
             <div class="form-group">
                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {% if field.label == '아이디' %}
+                    <button type="button" class='btn-outline-dark btn-sm'>중복확인</button>
+                    {% else %}
+                    {%endif%}
+                    {% if field.label == '닉네임' %}
+                    <button type="button" class='btn-outline-dark btn-sm'>중복확인</button>
+                    {% else %}
+                    {%endif%}
+                    {% if field.label == '이메일' %}
+                    <button type="button" class='btn-outline-dark btn-sm'>중복확인</button>
+                    {% else %}
+                    {%endif%}
                 <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}"
                     placeholder="{{ field.label }}" name="{{ field.name }}" />
             </div>
