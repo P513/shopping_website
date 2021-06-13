@@ -17,9 +17,9 @@ class SignUpView(FormView):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
-            # user DB 추가하는 구문 넣어야하나
             return redirect('user:login')
-        return render(request, self.name, {'form': form})
+        else:
+            return render(request, self.template_name, {'form': form})
 
 
 class LoginView(FormView):
@@ -30,6 +30,5 @@ class LoginView(FormView):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
-            # user DB 추가하는 구문 넣어야하나
             return render(request, 'index.html')
-        return render(request, self.name, {'form': form})
+        return render(request, self.template_name, {'form': form})
