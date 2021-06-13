@@ -19,7 +19,8 @@ class SignUpView(FormView):
         if form.is_valid():
             # user DB 추가하는 구문 넣어야하나
             return redirect('user:login')
-        return render(request, self.name, {'form': form})
+
+        return render(request, self.template_name, {'form': form})
 
 
 class LoginView(FormView):
