@@ -1,5 +1,6 @@
 from django import forms
 from .models import User
+from django.contrib.auth.hashers import check_password, make_password
 
 
 class SignUpForm(forms.Form):
@@ -10,7 +11,7 @@ class SignUpForm(forms.Form):
     email = forms.EmailField(
         error_messages={'required': '이메일을 입력해주세요.'}, label='이메일',)
     password = forms.CharField(
-        error_messages={'required': '비밀번호를 입력해주세요.'}, max_length=64, widget=forms.PasswordInput, label='비밀번호',)
+        error_messages={'required': '비밀번호를 입력해주세요.'}, widget=forms.PasswordInput, label='비밀번호',)
     confirm_password = forms.CharField(
         error_messages={'required': '비밀번호를 한번 더 입력해주세요.'}, widget=forms.PasswordInput, label='비밀번호 확인',)
 
@@ -45,7 +46,7 @@ class SignUpForm(forms.Form):
                         _id=_id,
                         nickname=nickname,
                         email=email,
-                        password=password,
+                        password=make_password(password),
                     )
                     user.save()
 
@@ -55,3 +56,19 @@ class LoginForm(forms.Form):
         error_messages={'required': '아이디를 입력해주세요.'}, max_length=64, label='아이디',)
     password = forms.CharField(
         error_messages={'required': '비밀번호를 입력해주세요.'}, max_length=64, widget=forms.PasswordInput, label='비밀번호',)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        _id = cleaned_data.get('_id')
+        password = cleaned_data.get('password')
+
+        if _id and password:
+            try:
+                user = User.objects.get(_id=_id)
+            except User.DoesNotExist:
+                self.add_error('_id', '해당 아이디가 존재하지 않습니다.')
+                return
+            if not check_password(password, user.password):
+                self.add_error('password', '비밀번호가 틀렸습니다.')
+            else:
+                self._id = user._id

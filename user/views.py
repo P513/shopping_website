@@ -1,4 +1,3 @@
-from django.http.response import HttpResponseRedirect
 from .forms import SignUpForm
 from .forms import LoginForm
 from django.shortcuts import render, redirect
@@ -30,5 +29,6 @@ class LoginView(FormView):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
+            # return render(request, 'product:products')
             return render(request, 'index.html')
         return render(request, self.template_name, {'form': form})
