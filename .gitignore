@@ -2,3 +2,6 @@
 venvs
 __pycache__/
 config/settings.py
+user/migrations
+order/migrations
+product/migrations
