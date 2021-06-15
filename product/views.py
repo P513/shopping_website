@@ -2,7 +2,7 @@ from product.models import Product
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
 from django.views.generic.edit import FormView
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 
 def index(request):
@@ -25,3 +25,9 @@ class Product_RegisterView(FormView):
 class ProductListView(ListView):
     model = Product
     template_name = 'product_list.html'
+
+
+class ProductDetailView(DetailView):
+    template_name = "product_detail.html"
+    queryset = Product.objects.all()
+    context_object_name = 'product'
