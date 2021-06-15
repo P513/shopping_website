@@ -1,7 +1,8 @@
+from product.models import Product
 from django.shortcuts import render, redirect
-from .models import Product
 from .forms import RegisterForm
 from django.views.generic.edit import FormView
+from django.views.generic import ListView
 
 
 def index(request):
@@ -19,3 +20,8 @@ class Product_RegisterView(FormView):
             return redirect('product:register')
         else:
             return render(request, self.template_name, {'form': form})
+
+
+class ProductListView(ListView):
+    model = Product
+    template_name = 'product_list.html'
