@@ -47,6 +47,7 @@ class SignUpForm(forms.Form):
                         nickname=nickname,
                         email=email,
                         password=make_password(password),
+                        grade='user',
                     )
                     user.save()
 
