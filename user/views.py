@@ -5,12 +5,12 @@ from django.views.generic.edit import FormView
 
 
 def index(request):
-    return render(request, 'index.html', {'user': request.session.get('user')})
+    return render(request, 'index.html', {'user': request.session.get('_id')})
 
 
 def logout(request):
-    if request.session.get('user'):
-        del(request.session['user'])
+    if request.session.get('_id'):
+        del(request.session['_id'])
     return redirect('user:login')
 
 
@@ -35,7 +35,7 @@ class LoginView(FormView):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
-            self.request.session['user'] = form.data.get('grade')
+            self.request.session['_id'] = form.data.get('_id')
             # return render(request, 'product:products')
-            return render(request, 'index.html')
+            return render(request, 'index.html', {'user': request.session.get('_id')})
         return render(request, self.template_name, {'form': form})

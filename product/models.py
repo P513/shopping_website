@@ -12,6 +12,6 @@ class Product(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'my_product'
+        db_table = 'product'
         verbose_name = '상품'
         verbose_name_plural = '상품'
