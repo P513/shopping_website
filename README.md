@@ -1,7 +1,6 @@
 # shopping_website
 
 dJango를 이용해 쇼핑몰 웹 사이트를 구현해보자.
-쇼핑 웹 사이트에 사용하는 API를 dJango를 통해 작성해보자.
 
 ## 제공하는 API 목록
 
