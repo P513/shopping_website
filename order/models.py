@@ -14,6 +14,6 @@ class Order(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'my_order'
+        db_table = 'order'
         verbose_name = '주문'
         verbose_name_plural = '주문'

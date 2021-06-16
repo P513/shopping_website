@@ -15,6 +15,6 @@ class User(models.Model):
         return self.nickname
 
     class Meta:
-        db_table = 'my_user'
+        db_table = 'user'
         verbose_name = '고객'
         verbose_name_plural = '고객'
