@@ -13,21 +13,24 @@
 </div>
 <div class="row mt-5">
     <div class="col-12">
-        <form method="POST" action=".">
+        <form>
             {% csrf_token %}
             {% for field in form %}
             <div class="form-group">
-                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                    {% if field.label == '아이디' %}
-                    <button type="button" class='btn-outline-dark btn-sm'>중복확인</button>
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label> 
+                {% if field.label == '아이디' %}
+                    <button name="checkID" type="submit" class='btn-outline-dark btn-sm' formaction="." formmethod="post" formtarget="_self">
+                        중복확인</button>
                     {% else %}
                     {%endif%}
                     {% if field.label == '닉네임' %}
-                    <button type="button" class='btn-outline-dark btn-sm'>중복확인</button>
+                    <button name="checkName" type="submit" class='btn-outline-dark btn-sm' formaction="."  formmethod="post">
+                        중복확인</button>
                     {% else %}
                     {%endif%}
                     {% if field.label == '이메일' %}
-                    <button type="button" class='btn-outline-dark btn-sm'>중복확인</button>
+                    <button name="checkMail" type="submit" class='btn-outline-dark btn-sm' formaction="."  formmethod="post">
+                        중복확인</button>
                     {% else %}
                     {%endif%}
                 <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}"
@@ -37,7 +40,7 @@
             <span style="color: red">{{ field.errors }}</span>
             {% endif %}
             {% endfor %}
-            <button type="submit" class="btn btn-primary">회원가입</button>
+            <button name="signup" type="submit" class="btn btn-primary" formaction="." formmethod="post">회원가입</button>
         </form>
     </div>
 </div>
