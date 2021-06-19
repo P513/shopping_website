@@ -4,7 +4,7 @@ from django.contrib.auth.hashers import check_password, make_password
 
 
 class SignUpForm(forms.Form):
-    _id = forms.CharField(
+    userid = forms.CharField(
         error_messages={'required': '아이디를 입력해주세요.'}, max_length=64, label='아이디',)
     nickname = forms.CharField(
         error_messages={'required': '닉네임을 입력해주세요.'}, max_length=64, label='닉네임',)
@@ -19,10 +19,10 @@ class SignUpForm(forms.Form):
         if 'signup' in self.data:
             cleaned_data = super().clean()
             check = 1
-            _id = cleaned_data.get('_id')
-            if _id:
-                if User.objects.filter(_id=_id).exists():
-                    self.add_error('_id', '존재하는 아이디입니다.')
+            userid = cleaned_data.get('userid')
+            if userid:
+                if User.objects.filter(userid=userid).exists():
+                    self.add_error('userid', '존재하는 아이디입니다.')
                     check = 0
             nickname = cleaned_data.get('nickname')
             if nickname:
@@ -44,7 +44,7 @@ class SignUpForm(forms.Form):
                 else:
                     if check == 1:
                         user = User(
-                            _id=_id,
+                            userid=userid,
                             nickname=nickname,
                             email=email,
                             password=make_password(password),
@@ -53,10 +53,10 @@ class SignUpForm(forms.Form):
                         user.save()
         elif 'checkID' in self.data:
             cleaned_data = super().clean()
-            _id = cleaned_data.get('_id')
-            if _id:
-                if User.objects.filter(_id=_id).exists():
-                    self.add_error('_id', '존재하는 아이디입니다.')
+            userid = cleaned_data.get('userid')
+            if userid:
+                if User.objects.filter(userid=userid).exists():
+                    self.add_error('userid', '존재하는 아이디입니다.')
         elif 'checkName' in self.data:
             cleaned_data = super().clean()
             nickname = cleaned_data.get('nickname')
@@ -72,23 +72,23 @@ class SignUpForm(forms.Form):
 
 
 class LoginForm(forms.Form):
-    _id = forms.CharField(
+    userid = forms.CharField(
         error_messages={'required': '아이디를 입력해주세요.'}, max_length=64, label='아이디',)
     password = forms.CharField(
         error_messages={'required': '비밀번호를 입력해주세요.'}, max_length=64, widget=forms.PasswordInput, label='비밀번호',)
 
     def clean(self):
         cleaned_data = super().clean()
-        _id = cleaned_data.get('_id')
+        userid = cleaned_data.get('userid')
         password = cleaned_data.get('password')
 
-        if _id and password:
+        if userid and password:
             try:
-                user = User.objects.get(_id=_id)
+                user = User.objects.get(userid=userid)
             except User.DoesNotExist:
-                self.add_error('_id', '해당 아이디가 존재하지 않습니다.')
+                self.add_error('userid', '해당 아이디가 존재하지 않습니다.')
                 return
             if not check_password(password, user.password):
                 self.add_error('password', '비밀번호가 틀렸습니다.')
             else:
-                self._id = user._id
+                self.userid = user.userid
