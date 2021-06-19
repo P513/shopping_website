@@ -2,6 +2,7 @@ from .forms import SignUpForm
 from .forms import LoginForm
 from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView
+from .models import User
 
 
 def index(request):
@@ -39,3 +40,8 @@ class LoginView(FormView):
             # return render(request, 'product:products')
             return render(request, 'index.html', {'user': request.session.get('_id')})
         return render(request, self.template_name, {'form': form})
+
+
+class UserListView(FormView):
+    model = User
+    template_name = 'user_list.html'
