@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block contents %}
+<div class="row mt-5">
+    <div class="col-12">
+        <table class="table table-light">
+            <thead class="thead thead-light">
+                <td scope="col">No.</td>
+                <td scope="col">아이디</td>
+                <td scope="col">닉네임</td>
+                <td scope="col">이메일 설명</td>
+                <td scope="col">등록 날짜</td>
+            </thead>
+            <tbody class="text-dark">
+                {% for user in object_list %}
+                <tr>
+                    <td scope="col">{{user.id}}</td>
+                    <td>{{ user._id }}</td>
+                    <td>{{ user.nickname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.create_date | date:'Y-m-d H:i'}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

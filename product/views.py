@@ -1,4 +1,4 @@
-from product.models import Product
+from .models import Product
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
 from django.views.generic.edit import FormView
