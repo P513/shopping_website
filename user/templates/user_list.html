@@ -15,7 +15,7 @@
                 {% for user in object_list %}
                 <tr>
                     <td scope="col">{{user.id}}</td>
-                    <td>{{ user._id }}</td>
+                    <td>{{ user.userid }}</td>
                     <td>{{ user.nickname }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.create_date | date:'Y-m-d H:i'}}</td>
@@ -25,3 +25,4 @@
         </table>
     </div>
 </div>
+{% endblock %}
