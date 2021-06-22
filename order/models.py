@@ -10,9 +10,6 @@ class Order(models.Model):
     quantity = models.IntegerField(verbose_name='수량')
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         db_table = 'order'
         verbose_name = '주문'
